@@ -1,5 +1,10 @@
-from osgeo import ogr
-'''##############'''
+try:
+    from osgeo import ogr
+except:
+    import ogr
+else:
+    print 'Error import ogr'
+    
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
@@ -19,8 +24,8 @@ layerOGR = shapefile.GetLayer()
 #Iterando sobre a geometria
 features = layer.getFeatures()
 dados=[]
-def get_feature(ft):
-    for i,f in enumerate(ft):
+
+for i,f in enumerate(features):
         featureOGR = layerOGR.GetFeature(i)  
         #Acessar todos os atributos do ponto
         featureOGR.items().values()
